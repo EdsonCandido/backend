@@ -9,6 +9,7 @@ class Rooms extends Model {
         user_id_clerk: DataTypes.INTEGER,
         duration: DataTypes.STRING,
         room: DataTypes.STRING,
+        is_accepted: DataTypes.INTEGER,
       },
       {
         sequelize: connection,

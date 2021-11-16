@@ -72,6 +72,7 @@ app.use(express.urlencoded({ extended: false }));
 /**
  * Import to parcial routes the application
  */
+const loginRouter = require("./routes/login");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const typesRouter = require("./routes/types");
@@ -81,6 +82,7 @@ const userTypeRouter = require("./routes/user_types");
 
 /** Path Routes */
 app.use("/", indexRouter);
+app.use("/login", loginRouter);
 app.use("/types", typesRouter);
 app.use("/users", usersRouter);
 app.use("/companies", companyRouter);

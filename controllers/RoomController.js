@@ -7,11 +7,17 @@ exports.findAll = async (req, res, next) => {
 
 exports.connectCall = async (req, res, next) => {
   const io = req.io;
-
+  let { user_id, user_id_interpreter, user_id_clerk } = req.body;
+  // const room = await Rooms.create({
+  //   user_id,
+  //   user_id_interpreter,
+  //   user_id_clerk,
+  // });
   io.on("connection", (socket) => {
     console.log("Join in room");
 
     socket.emit("me", socket.id);
+
     socket.on("disconnect", () => {
       io.broadcast.emit("callEnded");
     });
@@ -54,11 +60,18 @@ exports.update = async (req, res, next) => {
   console.log("*-*-*-*-*-*-*-*-*-*-*-*-*-*");
   console.log("date =>", date_finish);
 
+  let duration = parseInt(date_finish - date_now);
+
   const room = await Rooms.update(
     { duration },
     {
       where: { id: room_id },
     }
   );
+
+  if (!room) {
+    res.status(500).json({ message: "Error in finish this room" });
+  }
+  res.json({ message: "Finish this room!" });
 };
 exports.destroy = async (req, res, next) => {};
