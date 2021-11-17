@@ -9,7 +9,7 @@ exports.findAll = async (req, res, next) => {
 
   res.json(types);
 };
-exports.save = async (req, res, nest) => {
+exports.save = async (req, res, next) => {
   const { name, description } = req.body;
   const type = await Type.create({ name, description });
   res.json(type);

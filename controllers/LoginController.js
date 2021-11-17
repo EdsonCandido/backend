@@ -8,6 +8,8 @@ exports.login = async (req, res, next) => {
 
   if (!user)
     return res.status(401).json({ message: "Login and password invalid" });
+  if (!user.dataValues.active)
+    return res.status(401).json({ message: "User not active" });
 
   const permission = await UserTypes.findAll({
     where: { user_id: user.dataValues.id },
