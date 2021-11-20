@@ -1,36 +1,12 @@
 const Rooms = require("../models/Rooms");
+
 exports.findAll = async (req, res, next) => {
   const rooms = await Rooms.findAll();
 
   res.json(rooms);
 };
 
-exports.connectCall = async (req, res, next) => {
-  const io = req.io;
-  let { user_id, user_id_interpreter, user_id_clerk } = req.body;
-  // const room = await Rooms.create({
-  //   user_id,
-  //   user_id_interpreter,
-  //   user_id_clerk,
-  // });
-  io.on("connection", (socket) => {
-    console.log("Join in room");
-
-    socket.emit("me", socket.id);
-
-    socket.on("disconnect", () => {
-      io.broadcast.emit("callEnded");
-    });
-
-    socket.on("callUser", ({ userToCall, signalData, from, name }) => {
-      io.to(userToCall).emit("callUser", { signal: signalData, from, name });
-    });
-
-    socket.on("answerCall", (data) => {
-      io.to(data.to).emit("callAccepted", data.signal);
-    });
-  });
-};
+exports.connectCall = async (req, res, next) => {};
 exports.findOne = async (req, res, next) => {};
 exports.save = async (req, res, next) => {
   let { user_id, user_id_clerk, user_id_interpreter } = req.body;

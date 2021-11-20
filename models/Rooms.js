@@ -5,11 +5,12 @@ class Rooms extends Model {
     super.init(
       {
         user_id: DataTypes.INTEGER,
-        user_id_interpreter: DataTypes.INTEGER,
-        user_id_clerk: DataTypes.INTEGER,
+        id_interpreter: DataTypes.INTEGER,
+        id_clerk: DataTypes.INTEGER,
         duration: DataTypes.STRING,
         room: DataTypes.STRING,
         is_accepted: DataTypes.INTEGER,
+        is_finish: DataTypes.INTEGER,
       },
       {
         sequelize: connection,

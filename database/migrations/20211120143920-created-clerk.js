@@ -8,7 +8,7 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    return await queryInterface.createTable("rooms", {
+    return await queryInterface.createTable("clerks", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -24,40 +24,13 @@ module.exports = {
         },
         onUpdate: "CASCADE",
       },
-      id_interpreter: {
+
+      is_logged: {
         type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: "users",
-          key: "id",
-        },
-        onUpdate: "CASCADE",
+        allowNull: false,
+        defaultValue: 0,
       },
-      id_clerk: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: "clerks",
-          key: "id",
-        },
-        onUpdate: "CASCADE",
-      },
-      duration: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      room: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      is_accepted: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      is_finish: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
+      active: { type: Sequelize.INTEGER, allowNull: false, defaultValue: 1 },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -76,6 +49,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    return queryInterface.dropTable("rooms");
+    return await queryInterface.dropTable("clerks");
   },
 };
