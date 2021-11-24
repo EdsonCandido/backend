@@ -5,21 +5,20 @@ const db_config = require("../config/database");
  * import models
  */
 const Users = require("../models/Users");
-const Types = require("../models/Types");
-const Companies = require("../models/Companies");
-const UserTypes = require("../models/UserTypes");
-const Rooms = require("../models/Rooms");
-const Totems = require("../models/Totems");
 const Clerk = require("../models/Clerks");
+const Totems = require("../models/Totems");
+const Companies = require("../models/Companies");
+const Rooms = require("../models/Rooms");
+const Interpreters = require("../models/Interpreters");
 
 const connection = new Sequelize(db_config);
 
 Users.init(connection);
-Companies.init(connection);
-Types.init(connection);
-UserTypes.init(connection);
-Rooms.init(connection);
-Totems.init(connection);
 Clerk.init(connection);
+Totems.init(connection);
+Interpreters.init(connection);
+Companies.init(connection);
+
+Rooms.init(connection);
 
 module.exports = connection;

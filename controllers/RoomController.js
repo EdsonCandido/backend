@@ -1,4 +1,5 @@
 const Rooms = require("../models/Rooms");
+const Service = require("../services/RoomService");
 
 exports.findAll = async (req, res, next) => {
   const rooms = await Rooms.findAll();
@@ -51,3 +52,8 @@ exports.update = async (req, res, next) => {
   res.json({ message: "Finish this room!" });
 };
 exports.destroy = async (req, res, next) => {};
+
+exports.getMyRoom = async (req, res, next) => {
+  const resp = await Service.findMyRoom(req.params.id);
+  return res.json(resp);
+};

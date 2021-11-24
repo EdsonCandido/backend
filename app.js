@@ -65,20 +65,16 @@ app.use(express.urlencoded({ extended: false }));
 const loginRouter = require("./routes/login");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const typesRouter = require("./routes/types");
 const companyRouter = require("./routes/company");
 const roomRouter = require("./routes/rooms");
-const userTypeRouter = require("./routes/user_types");
 const totemRouter = require("./routes/totem");
 
 /** Path Routes */
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
-app.use("/types", typesRouter);
 app.use("/users", usersRouter);
 app.use("/companies", companyRouter);
 app.use("/rooms", roomRouter);
-app.use("/permissions", userTypeRouter);
 app.use("/totem", totemRouter);
 
 /**
@@ -168,13 +164,17 @@ io.sockets.on("connection", async function (socket) {
    */
   socket.on("subscribe", async (data) => {
     console.log("Esse usuário entrou =>", data);
-    const totem_id = data.key;
+    const totem_id = 1;
     const totem = await TotemController.findOne(totem_id);
     const clerk = await ClerkController.findOneFree();
+
+    let interpreter;
     if (data.interpreter == 1) {
       console.log("Gerar sala com interpreter");
     }
     const room_info = await RoomService.createRoom(totem, clerk, interpreter);
+
+    console.log(room_info);
 
     socket.emit("me", `${room_info.id}`);
     socket.join(`${room_info.id}`);

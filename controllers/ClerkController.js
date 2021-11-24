@@ -1,4 +1,5 @@
 const Clerk = require("../models/Clerks");
+const Users = require("../models/Users");
 exports.findAll = async () => {
   const resp = await Clerk.findAll();
 
@@ -9,12 +10,16 @@ exports.findOne = async (key) => {
   return resp;
 };
 exports.create = async (user_id, state = {}) => {
+  const user = await Users.create(state);
   const resp = await Clerk.create({
-    user_id,
+    user_id: user.getDataValue("id"),
   });
   return resp;
 };
 exports.update = async (key, state) => {
+  const clerk = await Clerk.findByPk(key);
+  const user = await Users.findByPk(clerk.getDataValue("id"));
+
   const resp = await Clerk.update(state, { where: { id: key } });
   return resp;
 };

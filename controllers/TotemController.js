@@ -6,6 +6,9 @@ exports.findAll = async () => {
 };
 exports.findOne = async (key) => {
   const totem = await Totem.findByPk(key);
+  if (!totem) {
+    return new Error("Totem not found in server");
+  }
   return totem;
 };
 exports.create = async (data) => {
@@ -46,7 +49,7 @@ exports.destroy = async (key) => {
     { where: { id: key } }
   );
   if (totem == 0) {
-    console.error("Erro in disable totem");
+    console.error(totem);
     return new Error("Erro in disable totem");
   }
   return true;

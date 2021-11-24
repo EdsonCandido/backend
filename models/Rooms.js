@@ -4,7 +4,7 @@ class Rooms extends Model {
   static init(connection) {
     super.init(
       {
-        user_id: DataTypes.INTEGER,
+        id_totem: DataTypes.INTEGER,
         id_interpreter: DataTypes.INTEGER,
         id_clerk: DataTypes.INTEGER,
         duration: DataTypes.STRING,

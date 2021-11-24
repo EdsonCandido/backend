@@ -15,11 +15,11 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      user_id: {
+      id_totem: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "users",
+          model: "totems",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -28,7 +28,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-          model: "users",
+          model: "interpreters",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -59,11 +59,11 @@ module.exports = {
         allowNull: true,
       },
       created_at: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false,
       },
       updated_at: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false,
       },
     });

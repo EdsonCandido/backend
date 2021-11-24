@@ -8,23 +8,25 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    return queryInterface.createTable("totems", {
+    return await queryInterface.createTable("interpreters", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
-        type: Sequelize.STRING,
+      id_user: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
       },
-      active: {
+      is_logged: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
-      },
-      disable: {
-        type: Sequelize.INTEGER,
+        allowNull: false,
         defaultValue: 0,
       },
       in_call: {
@@ -49,6 +51,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    return queryInterface.dropTable("totems");
+    return await queryInterface.dropTable("interpreters");
   },
 };

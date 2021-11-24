@@ -4,7 +4,7 @@ class Totems extends Model {
   static init(connection) {
     super.init(
       {
-        name: DataTypes.STRING,
+        id_user: DataTypes.INTEGER,
         active: DataTypes.INTEGER,
         disable: DataTypes.INTEGER,
         in_call: DataTypes.INTEGER,
